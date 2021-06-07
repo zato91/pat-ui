@@ -1,12 +1,13 @@
-import React from 'react'
-import Form from './Form'
+import React from "react";
+import { action } from "@storybook/addon-actions";
+import Form from './Form.js'
+
 
 export default {
-  title: 'Form/Form',
+  title: 'Form',
   component: Form,
-  
 
 }
 
 
-export const defaultForm = () => <Form />
+export const DefaultForm = () => <Form onSubmit={action('onSubmited') }  />

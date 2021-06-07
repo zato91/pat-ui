@@ -60,49 +60,55 @@ const ButtonContainer = styled.div`
 `
 
 
-export default function Form() {
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [password, setPassword] = useState('');
+export default function Form(props) {
+    
+    const [inputValues, setInputValues] = useState({
+        firstname:'', lastname: '', password: ''
+      });
+      
+      const handleOnChange = event => {
+        const { name, value } = event.target;
+        setInputValues({ ...inputValues, [name]: value });
+      };
+
+   
   
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log(firstname,lastname,password)
-        
-      };
+    const handleSubmit = () => props.onSubmit(inputValues);
 
 
 
     return (
         
-                <Formm onSubmit={handleSubmit}>
-       
+              
+            <Formm >
         
                     <Input 
                         md
-                        onChange={(e)=> setFirstname(e.target.value)}
-                        name="username" 
+                        onChange={handleOnChange}
+                        name="firstname" 
                         type="text"
-                        placeholder="Username" />
+                        placeholder="firstname" />
 
                     <Input 
                       md
-                      onChange={(e)=> setLastname(e.target.value)}
+                      onChange={handleOnChange}
                       name="lastname" 
                       type="text"
                       placeholder="lastname" />
 
                     <Input 
                        
-                       onChange={(e)=> setPassword(e.target.value)}
+                       onChange={handleOnChange}
                         name="password" 
                         type="password"
                         placeholder="Password"
                         />
 
                     <ButtonContainer>
-                        <Button large type="submit" >Submit</Button>
+                        <Button large type="button" onClick={handleSubmit} >
+                            Submit
+                        </Button>
                     </ButtonContainer>
       
         
